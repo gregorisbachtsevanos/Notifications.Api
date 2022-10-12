@@ -15,7 +15,7 @@ export const useSignup = () => {
 				password
 			);
 			console.log(res.user);
-			if (!res.ok) throw new Error('Could not complete signup'); //! Bad request
+			if (!res) throw new Error('Could not complete signup'); //! Bad request
 
 			// add display name to the user
 			await res.user.updateProfile({ displayName });
@@ -28,5 +28,5 @@ export const useSignup = () => {
 		}
 	};
 
-	return { error, isPending, signup };
+	return { signup, error, isPending };
 };
