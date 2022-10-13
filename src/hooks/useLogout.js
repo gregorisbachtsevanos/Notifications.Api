@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { projectAuth } from '../firebase/config';
 import { useAuthContext } from './useAuthContext';
 
 export const useLogout = () => {
+	const [isCancelled, setIsCancelled] = useState(false);
 	const [error, setError] = useState(null);
 	const [isPending, setIsPending] = useState(false);
 	const { dispatch } = useAuthContext();
@@ -13,15 +14,24 @@ export const useLogout = () => {
 
 		try {
 			await projectAuth.signOut();
-			dispatch({ type: 'LOGOUT' })
-         setIsPending(null);
-         setIsPending(false);
+			dispatch({ type: 'LOGOUT' });
+
+			if (!isCancelled) {
+				setIsPending(null);
+				setIsPending(false);
+			}
 		} catch (err) {
-			console.log(err.message);
-			setError(err.message);
-			setIsPending(false);
+			if (!isCancelled) {
+				console.log(err.message);
+				setError(err.message);
+				setIsPending(false);
+			}
 		}
 	};
 
-   return { logout, error, isPending };
+	useEffect(() => {
+		return () => setIsCancelled(true);
+	}, []);
+
+	return { logout, error, isPending };
 };
