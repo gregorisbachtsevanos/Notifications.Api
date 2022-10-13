@@ -20,8 +20,8 @@ const NavBar = () => {
 					<Link to="signup">Signup</Link>
 				</li>
 				<li>
-					<Link to="/" onClick={logout}>Logout</Link>
-				</li>
+              <button className="btn" onClick={logout}>Logout</button>
+            </li>
 			</ul>
 		</nav>
 	);
