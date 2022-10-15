@@ -8,7 +8,7 @@ export const authReducer = (state, action) => {
 		case 'LOGIN':
 			return { ...state, user: action.payload };
 		case 'AUTH_IS_READY':
-			return { ...state, user: action.payload };
+			return { ...state, user: action.payload, authIsReady: true };
 		case 'LOGOUT':
 			return { ...state, user: null };
 		default:
@@ -26,7 +26,7 @@ export const AuthContextProvider = ({ children }) => {
 		const unsub = projectAuth.onAuthStateChanged((user) => {
 			dispatch({ type: 'AUTH_IS_READY', payload: user });
 			console.log(unsub());
-			// unsub()
+			unsub()
 		});
 	}, []);
 

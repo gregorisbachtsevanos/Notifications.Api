@@ -1,8 +1,8 @@
-import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuthContext } from '../hooks/useAuthContext.js';
-import { useLogout } from '../hooks/useLogout';
-import styles from './NavBar.module.css';
+import { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext.js";
+import { useLogout } from "../hooks/useLogout";
+import styles from "./NavBar.module.css";
 
 const NavBar = () => {
 	const { logout } = useLogout();
