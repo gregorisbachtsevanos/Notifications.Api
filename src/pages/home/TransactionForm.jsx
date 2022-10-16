@@ -11,7 +11,7 @@ const TransactionForm = () => {
 
 	return (
 		<Fragment>
-			<h3>Transaction</h3>
+			<h3>Add a Transaction</h3>
 			<form onSubmit={handleSubmit}>
 				<label>
 					<span>Transaction name:</span>
