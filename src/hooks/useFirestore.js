@@ -22,10 +22,10 @@ export const useFirestore = (collection) => {
     // collection ref
     const ref = projectFirestore.collection(collection)
 
-    // add documemt
+    // add document
     const addDocument = (doc) => { }
 
-    // delete documemt
+    // delete document
     const deleteDocument = (id) => { }
 
     useEffect(() => {
