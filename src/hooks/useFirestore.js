@@ -12,24 +12,24 @@ const firestoreReducer = (state, action) => {
 	switch (action.type) {
 		case 'IS_PENDING':
 			return {
-				document: null,
+				success: false,
 				isPending: true,
 				error: null,
-				success: false,
-			};
-		case 'ADDED_DOCUMENT':
-			return {
-				document: action.payload,
-				isPending: false,
-				error: null,
-				success: true,
+				document: null,
 			};
 		case 'ERROR':
 			return {
-				document: null,
+				success: false,
 				isPending: false,
 				error: action.payload,
-				success: false,
+				document: null,
+			};
+		case 'ADDED_DOCUMENT':
+			return {
+				success: true,
+				isPending: false,
+				error: null,
+				document: action.payload,
 			};
 		default:
 			return state;
@@ -43,33 +43,34 @@ export const useFirestore = (collection) => {
 	// collection ref
 	const ref = projectFirestore.collection(collection);
 
-	// dispatch if not cancelled
+	// only dispatch if not cancelled
 	const dispatchIfNotCancelled = (action) => {
-		if (!isCancelled) dispatch(action);
+		if (!isCancelled) {
+			dispatch(action);
+		}
 	};
 
-	// add document
+	// add a document
 	const addDocument = async (doc) => {
 		dispatch({ type: 'IS_PENDING' });
-
 		try {
-            const createdAt = timestamp.fromDate(new Date())
-			const addedDocument = await ref.add({...doc, createdAt});
+			const createdAt = timestamp.fromDate(new Date());
+			const addedDocument = await ref.add({ ...doc, createdAt });
 			dispatchIfNotCancelled({
 				type: 'ADDED_DOCUMENT',
 				payload: addedDocument,
 			});
-		} catch (error) {
-			dispatchIfNotCancelled({ type: 'ERROR', payload: error.message });
+		} catch (err) {
+			dispatchIfNotCancelled({ type: 'ERROR', payload: err.message });
 		}
 	};
 
-	// delete document
-	const deleteDocument = (id) => {};
+	// delete a document
+	const deleteDocument = async (doc) => {};
 
-	useEffect(() => {
-		return () => setIsCancelled(true);
-	}, []);
+	// useEffect(() => {
+	// 	return () => setIsCancelled(true);
+	// }, []);
 
 	return { addDocument, deleteDocument, res };
 };

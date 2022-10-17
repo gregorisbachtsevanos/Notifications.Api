@@ -1,13 +1,23 @@
-import React, { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from 'react';
+import { useFirestore } from '../../hooks/useFirestore';
 
-const TransactionForm = () => {
-	const [name, setName] = useState("");
-	const [amount, setAmount] = useState("");
+const TransactionForm = ({ uid }) => {
+	const [name, setName] = useState('');
+	const [amount, setAmount] = useState('');
+	const { addDocument, res } = useFirestore('transactions');
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log({ name, amount });
+		addDocument({ uid, name, amount });
 	};
+
+	// reset the form fields
+	useEffect(() => {
+		if (res.success) {
+			setName('');
+			setAmount('');
+		}
+	}, [res.success]);
 
 	return (
 		<Fragment>
