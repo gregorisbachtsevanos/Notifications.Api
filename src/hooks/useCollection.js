@@ -1,15 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { projectFirestore } from '../firebase/config';
 
-export const useCollection = (collection) => {
+export const useCollection = (collection, _query) => {
 	const [error, setError] = useState(false);
 	const [isPending, setIsPending] = useState(false);
 	const [transactions, setTransactions] = useState([]);
 
+	//! if we don't use useRef --> infinite loop in useEffect
+	//! _query is an array and is 'different' on every call
+	const query = useRef(_query).current
+
 	useEffect(() => {
 		setIsPending(true);
 
-		const unsub = projectFirestore.collection(collection).onSnapshot(
+		let ref = projectFirestore.collection(collection)
+
+		if(query) ref = ref.where(...query).orderBy("createdAt", 'desc');
+		
+		const unsub = ref.onSnapshot(
 			(snapshot) => {
 				if (snapshot.empty) {
 					setError('No transactions to load');
@@ -30,7 +38,7 @@ export const useCollection = (collection) => {
 			}
 		);
 		return () => unsub();
-	}, [collection]);
+	}, [collection, query]);
 
 	return { error, isPending, transactions };
 };

@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { projectFirestore } from '../../firebase/config';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useCollection } from '../../hooks/useCollection';
 import styles from './Home.module.css';
@@ -8,7 +6,11 @@ import TransactionList from './TransactionList';
 
 const Home = () => {
 	const { user } = useAuthContext();
-	const { error, isPending, transactions } = useCollection('transactions');
+	const { error, isPending, transactions } = useCollection('transactions', [
+		'uid',
+		'==',
+		user.uid,
+	]);
 
 	return (
 		<div className={styles.container}>
