@@ -8,40 +8,7 @@ import TransactionList from './TransactionList';
 
 const Home = () => {
 	const { user } = useAuthContext();
-	// const [error, setError] = useState(false);
-	// const [isPending, setIsPending] = useState(false);
-	// const [transactions, setTransactions] = useState([]);
 	const { error, isPending, transactions } = useCollection('transactions');
-
-	// useEffect(() => {
-	// 	setIsPending(true);
-
-	// 	const getTransaction = async () => {
-	// 		projectFirestore.collection('transactions').onSnapshot(
-	// 			(snapshot) => {
-	// 				if (snapshot.empty) {
-	// 					setError('No transactions tom load');
-	// 					setIsPending(false);
-	// 				} else {
-	// 					let result = [];
-	// 					snapshot.docs.forEach((doc) => {
-	// 						result.push({ id: doc.id, ...doc.data() });
-	// 					});
-	// 					setTransactions(result);
-	// 					setIsPending(false);
-	// 					setError(null);
-	// 				}
-	// 			},
-	// 			(err) => {
-	// 				setError(err.message);
-	// 				setIsPending(false);
-	// 			}
-	// 		);
-	// 	};
-
-	// 	getTransaction();
-	// }, []);
-	// console.log(transaction)
 
 	return (
 		<div className={styles.container}>
