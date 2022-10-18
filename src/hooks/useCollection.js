@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { projectFirestore } from '../../firebase/config';
+import { useEffect, useState } from 'react';
+import { projectFirestore } from '../firebase/config';
 
 export const useCollection = (collection) => {
 	const [error, setError] = useState(false);
@@ -29,8 +29,8 @@ export const useCollection = (collection) => {
 				setIsPending(false);
 			}
 		);
-      return () => unsub()
+		return () => unsub();
 	}, [collection]);
 
-   return { error , isPending, transactions}
+	return { error, isPending, transactions };
 };
