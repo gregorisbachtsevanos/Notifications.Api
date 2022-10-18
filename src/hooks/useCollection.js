@@ -9,10 +9,10 @@ export const useCollection = (collection) => {
 	useEffect(() => {
 		setIsPending(true);
 
-		const unsub = projectFirestore.collection('transactions').onSnapshot(
+		const unsub = projectFirestore.collection(collection).onSnapshot(
 			(snapshot) => {
 				if (snapshot.empty) {
-					setError('No transactions tom load');
+					setError('No transactions to load');
 					setIsPending(false);
 				} else {
 					let result = [];
