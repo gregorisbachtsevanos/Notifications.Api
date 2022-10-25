@@ -15,8 +15,8 @@ export const useCollection = (collection, _query) => {
 
 		let ref = projectFirestore.collection(collection)
 
-		if(query) ref = ref.where(...query).orderBy("createdAt", 'desc');
-		
+		if (query) ref = ref.where(...query).orderBy("createdAt", 'desc');
+
 		const unsub = ref.onSnapshot(
 			(snapshot) => {
 				if (snapshot.empty) {
