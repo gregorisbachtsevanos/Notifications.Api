@@ -27,6 +27,11 @@ This repository contains the backend code for the Notification Service of the [M
 - **Notification System**
   - Schedule and send notifications for task deadlines and progress updates.
 
+- **Responsibilities**
+  - Manage notifications for task deadlines, milestones, and reminders.
+  - Send notifications via email, SMS, or in-app.
+  - Integrate with the roadmap for calendar-based notifications.
+
 ## Getting Started
 
 ### Prerequisites
