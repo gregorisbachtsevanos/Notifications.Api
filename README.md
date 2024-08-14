@@ -1,69 +1,81 @@
-# Budget Tracker (React)
+# Notification.Api
 
-Welcome to the Budget Tracker, a web application for managing your finances and tracking your expenses, built with React and Firebase.
+## Overview
 
-## Table of Contents
+This repository contains the backend code for the Notification Service of the [Milestone](https://github.com/gregorisbachtsevanos/Milestone.Client) project. Utilizing Express.js and TypeScript, this service manages all notification-related functionalities, including the scheduling and delivery of alerts for task deadlines, milestones, and other important project events. By integrating with MongoDB, it supports flexible and varied notification types, ensuring timely updates are sent to users via email, SMS, or in-app notifications. This service is essential for keeping teams informed and on track with project timelines.
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Managing Budget](#managing-budget)
-- [Contributing](#contributing)
-- [License](#license)
+## Tech Stack
 
-## Introduction
-
-The Budget Tracker is a versatile financial management tool that allows users to monitor their income, expenses, and overall financial health. It provides a user-friendly interface for budgeting and expense tracking.
+- **Framework**: Express.js
+- **Language**: TypeScript
+- **Database**: MongoDB
+- **ORM/ODM**: Mongoose
+- **Testing**: (Choose one, e.g., Jest, Mocha, etc.)
 
 ## Features
 
-- Create and manage budgets.
-- Record and categorize expenses.
-- Track income sources.
-- Generate financial reports.
-- User authentication (registration and login).
-- Personalized user profiles.
+- **API Endpoints**
+  - POST /notifications
+  - GET /notifications/{userId}
+  - PUT /notifications/{notificationId}
+  - DELETE /notifications/{notificationId}
+  
+- **Database Management**
+  - Store and retrieve notification.
+  - NoSQL data handling.
 
-## Technologies Used
-
-This project is built using the following technologies:
-
-- React
-- Firebase (Authentication, Realtime Database, Hosting)
+- **Notification System**
+  - Schedule and send notifications for task deadlines and progress updates.
 
 ## Getting Started
 
-Follow these steps to get started with the Budget Tracker (React) application.
-
 ### Prerequisites
 
-Before you begin, ensure you have the following:
-
-- Node.js and npm
-- Git (for version control)
+- Node.js
+- npm
+- TypeScript
+- MongoDB setup
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository**:
+   ```
+   git clone https://github.com/gregorisbachtsevanos/Notifications.Api.git
+   ```
 
+2. **Create a .env file in the root of your project and add your Firebase config:**
+   ```
+   VITE_API_URL= 
+   VITE_API_URL= 
+   ```
+   
+3. **Install dependencies**:
    ```bash
-   git clone https://github.com/gregorisbachtsevanos/keep-me-on-budget.git
+   cd Notifications.Api
+   npm install 
+   ```
+   
+4. **Start the development server**:
+   ```
+   npm run dev:uat
+   ```
+   
+5. **Start the production server**:
+   ```
+   npm run dev:prod
+   ```
+   
+### Project Structure
+```
+src/\
+├── controllers/\
+├── models/\
+├── routes/\
+├── middleware/\
+├── utils/\
+├── services/\
+└── app.ts
+```
 
-2. cd into the project
-
-   ```bash
-   cd keep-me-on-budget
-
-3. Install
-
-   ```bash
-   npm install
-
-3. Run the app
-
-   ```bash
-   npm start
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
